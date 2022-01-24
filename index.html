@@ -24,9 +24,6 @@
 		<svg id="main_svg"  version="1.0" xmlns="http://www.w3.org/2000/svg">
 		</svg>
 	</div>
-	<div style="display: none;" id="tempHideImg">
-		<img id="hideImg"></div>
-	</div>
 
 </div>
 
@@ -71,7 +68,7 @@ function doThing(g)
 		var user_name = user_object.Name
 		var memory = user_object.Memory;
 		//Final_Images_Nobg
-		$("#hideImg").attr("src","FinalData/Final_Images_Clipped/"+g.id+".png"); 
+		//$("#hideImg").attr("src","FinalData/Final_Images_Clipped/"+g.id+".png"); 
 		
 		$('.overlay_content').load('modal.html', function() {
 			$('.overlay_content').css('border',"8px solid "+user_object.HexColor)
