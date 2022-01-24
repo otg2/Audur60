@@ -70,14 +70,14 @@ function doThing(g)
 		var overlay = new Overlay();
 		var user_name = user_object.Name
 		var memory = user_object.Memory;
-
-		$("#hideImg").attr("src","FinalData/Final_Images_Nobg/"+g.id+".png"); 
+		//Final_Images_Nobg
+		$("#hideImg").attr("src","FinalData/Final_Images_Clipped/"+g.id+".png"); 
 		
 		$('.overlay_content').load('modal.html', function() {
 			$('.overlay_content').css('border',"8px solid "+user_object.HexColor)
 			$("#modal_user_name").text(user_name)
 			$("#modal_memory").html(memory)
-			$("#modal_user").attr("src","FinalData/Final_Images_Nobg/"+g.id+".png"); 
+			$("#modal_user").attr("src","FinalData/Final_Images_Clipped/"+g.id+".png"); 
 		});
 	});
 }
