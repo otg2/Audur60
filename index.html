@@ -32,10 +32,10 @@
 
 $.ajaxSetup ({
     // Disable caching of AJAX responses
-    cache: false
+    //cache: false
 });
 
-setSvgViewbox
+
 function setSvgViewbox(jsonObject) {
 	
 	var svg_drawing = $('#main_svg')
@@ -60,16 +60,11 @@ function generateOverlayShape(jsonObject) {
 // https://github.com/m-thalmann/overlayjs
 function doThing(g)
 {
-	//console.log(g.id);
-	// tempHideImg
 	$.getJSON( "FinalData/Final_UserInfo/"+g.id+".json", function( user_object ) {
-		//console.log(user_object)
 		var overlay = new Overlay();
 		var user_name = user_object.Name
 		var memory = user_object.Memory;
 		//Final_Images_Nobg
-		//$("#hideImg").attr("src","FinalData/Final_Images_Clipped/"+g.id+".png"); 
-		
 		$('.overlay_content').load('modal.html', function() {
 			$('.overlay_content').css('border',"8px solid "+user_object.HexColor)
 			$("#modal_user_name").text(user_name)
@@ -79,15 +74,27 @@ function doThing(g)
 	});
 }
 
+function doHover(g, adder)
+{
+	var image = $("#img_"+g.id)
+	var top = image.attr("data-top")
+	anime({
+		targets: "#img_"+g.id,
+		top: parseInt(top) - adder,
+	});
+	//image.css('top', parseInt(top) - adder +"px")
+}
+
+
 function polylinePaths(obj) {
     g=$(document.createElementNS('http://www.w3.org/2000/svg', 'g')).attr({id: obj.ImageId})
-	$(g).append(
-		$(document.createElementNS('http://www.w3.org/2000/svg', 'polyline'))
-		.attr({
-			class: "main",
-			points: obj.SvgPolyline
-		})
-	)
+		$(g).append(
+			$(document.createElementNS('http://www.w3.org/2000/svg', 'polyline'))
+			.attr({
+				class: "main",
+				points: obj.SvgPolyline
+			})
+		)
     return $(g)[0]
 }
 
@@ -110,15 +117,18 @@ $.getJSON( "FinalData/artwork.json", function( json ) {
 	
 	document.querySelectorAll("g").forEach(function(userItem) {
 	  userItem.addEventListener("click", () => doThing(userItem));
+	  userItem.addEventListener("mouseover", () => doHover(userItem, 5));
+	  userItem.addEventListener("mouseout", () => doHover(userItem, 0));
 	});
 	
-	/*anime({
+	// Add some breath to it
+	anime({
 	  targets: ['.move', 'svg'],
-	  translateX: 2,
+	  translateY: 3,
 	  direction: 'alternate',
 	  loop: true,
 	  easing: 'easeInOutSine'
-	});*/
+	});
  });
  
  //margin left
@@ -130,7 +140,7 @@ function loadAndPlaceImage(image, zIndex)
 	
 	imageDom.dataset.left = image.Left
 	imageDom.dataset.top = image.Top
-	
+	imageDom.id = "img_"+ image.ImageId
 	imageDom.className  = "move";
 	imageDom.src = image.PreprocessedPath;
 	imageDom.style.left = left+image.Left+"px";
