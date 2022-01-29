@@ -34,7 +34,7 @@ $.ajaxSetup ({
     // Disable caching of AJAX responses
     //cache: false
 });
-
+var overlay = null;
 
 function setSvgViewbox(jsonObject) {
 	
@@ -44,7 +44,7 @@ function setSvgViewbox(jsonObject) {
 	
 	svg_drawing.height(_height);
 	svg_drawing.width(_width);
-	//svg_drawing.removeAttr('viewBox');
+	svg_drawing.removeAttr('viewBox');
 	svg_drawing.each(function () { $(this)[0].setAttribute('viewBox', '0 0 '+_width+' '+_height) });
 }
 
@@ -60,6 +60,9 @@ function generateOverlayShape(jsonObject) {
 // https://github.com/m-thalmann/overlayjs
 function doThing(g)
 {
+	var existingOverlay = $('.overlay')
+	if(existingOverlay.length > 0) return;
+
 	$.getJSON( "FinalData/Final_UserInfo/"+g.id+".json", function( user_object ) {
 		var overlay = new Overlay();
 		var user_name = user_object.Name
@@ -69,7 +72,7 @@ function doThing(g)
 			$('.overlay_content').css('border',"8px solid "+user_object.HexColor)
 			$("#modal_user_name").text(user_name)
 			$("#modal_memory").html(memory)
-			$("#modal_user").attr("src","FinalData/Final_Images_Clipped/"+g.id+".png"); 
+			//$("#modal_user").attr("src","FinalData/Final_Images_Nobg/"+g.id+".png"); 
 		});
 	});
 }
@@ -122,13 +125,13 @@ $.getJSON( "FinalData/artwork.json", function( json ) {
 	});
 	
 	// Add some breath to it
-	/*anime({
+	anime({
 	  targets: ['.move', 'svg'],
 	  translateY: 3,
 	  direction: 'alternate',
 	  loop: true,
 	  easing: 'easeInOutSine'
-	});*/
+	});
  });
  
  //margin left
