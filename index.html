@@ -44,7 +44,7 @@ function setSvgViewbox(jsonObject) {
 	
 	svg_drawing.height(_height);
 	svg_drawing.width(_width);
-	svg_drawing.removeAttr('viewBox');
+	//svg_drawing.removeAttr('viewBox');
 	svg_drawing.each(function () { $(this)[0].setAttribute('viewBox', '0 0 '+_width+' '+_height) });
 }
 
@@ -117,18 +117,18 @@ $.getJSON( "FinalData/artwork.json", function( json ) {
 	
 	document.querySelectorAll("g").forEach(function(userItem) {
 	  userItem.addEventListener("click", () => doThing(userItem));
-	  userItem.addEventListener("mouseover", () => doHover(userItem, 5));
+	  userItem.addEventListener("mouseover", () => doHover(userItem, 3));
 	  userItem.addEventListener("mouseout", () => doHover(userItem, 0));
 	});
 	
 	// Add some breath to it
-	anime({
+	/*anime({
 	  targets: ['.move', 'svg'],
 	  translateY: 3,
 	  direction: 'alternate',
 	  loop: true,
 	  easing: 'easeInOutSine'
-	});
+	});*/
  });
  
  //margin left

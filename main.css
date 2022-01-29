@@ -19,7 +19,7 @@ background-color: rgba(0,0,0,0);
 
 .container{
 position: relative;
-margin-top:10%;
+margin-top:2%;
 }
 
 .artworkDisplay
@@ -49,5 +49,5 @@ text-align:center; /*Remember to remove*/
 }
 .stack-top
 {
-z-index: 10;
+z-index: 1000;
 }
