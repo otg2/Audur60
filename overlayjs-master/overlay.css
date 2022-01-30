@@ -5,12 +5,12 @@
   right: 0;
   bottom: 0;
   /*animation: overlay_fadein 0.5s;*/
-  background-color: rgba(0, 0, 0, 0.7);
+  /*background-color: rgba(0, 0, 0, 0.2);*/
   z-index: 2000;
 }
 
 .overlay.overlay_closing{
-  /*animation: overlay_fadeout 0.5s;*/
+  animation: overlay_fadeout 0.5s;
   background-color: rgba(0, 0, 0, 0);
 }
 

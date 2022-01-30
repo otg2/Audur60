@@ -130,6 +130,14 @@ function doThing(g)
 
 	$.getJSON( "FinalData/Final_UserInfo/"+g.id+".json", function( user_object ) {
 		var overlay = new Overlay();
+
+		
+		anime({
+				targets: ".overlay",
+				backgroundColor: "rgba(0, 0, 0, 0.7)",
+				easing: 'easeOutElastic(1, 2)'
+		});
+
 		var user_name = user_object.Name
 		var memory = user_object.Memory;
 		//Final_Images_Nobg
