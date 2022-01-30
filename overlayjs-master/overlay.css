@@ -10,7 +10,7 @@
 }
 
 .overlay.overlay_closing{
-  animation: overlay_fadeout 0.5s;
+  /*animation: overlay_fadeout 0.5s;*/
   background-color: rgba(0, 0, 0, 0);
 }
 
