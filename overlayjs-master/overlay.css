@@ -19,8 +19,8 @@
   max-width: 100%;
   max-height: 100%;
   overflow: auto;
-  min-width: 250px;
-  min-height: 100px;
+  min-width: 200px;
+  min-height: 300px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -30,8 +30,6 @@
   animation: overlay_content_fadein 0.5s;
   opacity: 1;
   padding: 5px;
-  height:70%;
-  width:80%;
 }
 
 .overlay.overlay_closing .overlay_content{

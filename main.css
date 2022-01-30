@@ -22,10 +22,10 @@ position: relative;
 margin-top:5%;
 }
 
-.artworkDisplay
+#artworkDisplay
 {
-border:1px solid blue;
-	
+	/*display: none;	*/
+	opacity: 0%;
 }
 
 .userHover{
@@ -50,4 +50,23 @@ text-align:center; /*Remember to remove*/
 .stack-top
 {
 z-index: 1000;
+}
+
+
+.grid-container {
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	height: 150px;
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+	grid-template-rows: auto auto auto auto auto
+}
+
+.grid-item {
+	background: rgba(0, 0, 0, 0.6);
+	margin: 1px;
+	border-radius: 50%
 }

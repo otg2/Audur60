@@ -16,7 +16,58 @@
 <body>
 
 <div class="container">
-
+	<div class="grid-container">
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+	</div>
 	<div id="artworkDisplay" class="box" >
 		</div>
    
@@ -34,6 +85,20 @@ $.ajaxSetup ({
     // Disable caching of AJAX responses
     //cache: false
 });
+
+anime({
+targets: '.grid-item',
+
+scale: [
+{value: 0.1, easing: 'easeOutSine', duration: 500},
+{value: 1, easing: 'easeInOutQuad', duration: 1000}
+],
+
+delay: anime.stagger(300, {grid: [10, 5], from: 'center'}),
+loop: true
+
+});
+
 var overlay = null;
 
 function setSvgViewbox(jsonObject) {
@@ -116,6 +181,22 @@ $.getJSON( "FinalData/artwork.json", function( json ) {
 		var image = loadAndPlaceImage(obj, zIndex);
 		images.push(image)
 		$('#artworkDisplay').append($(image))
+	});
+
+	var $images = $('#artworkDisplay img'),
+    preloaded = 0,
+    total = $images.length;
+	$images.on('load',function() {
+			if (++preloaded === total) {
+					$('.grid-container').remove()
+					anime({
+						targets: '#artworkDisplay',
+						loop: false,
+						opacity: 1,
+						duration: 1800,
+						easing: 'easeInOutExpo'
+					});
+			}
 	});
 	
 	document.querySelectorAll("g").forEach(function(userItem) {
