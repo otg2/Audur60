@@ -1,3 +1,17 @@
+@media (hover: none) {
+  .header {
+		font-size:70px;
+  }
+	.page {
+		font-size:60px;
+  }
+
+	.overlay .overlay_content{
+		width:70%;
+	}
+}
+
+
 
 svg 
 {
@@ -19,7 +33,7 @@ background-color: rgba(0,0,0,0);
 
 .container{
 position: relative;
-margin-top:5%;
+/*margin-top:5%;*/
 }
 
 #artworkDisplay

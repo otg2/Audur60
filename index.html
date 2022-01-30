@@ -207,12 +207,15 @@ $.getJSON( "FinalData/artwork.json", function( json ) {
 	
 	// Add some breath to it
 	anime({
-	  targets: ['.move', 'svg'],
+	  targets: ['#artworkDisplay', 'svg'],
 	  translateY: 3,
 	  direction: 'alternate',
 	  loop: true,
 	  easing: 'easeInOutSine'
 	});
+
+	midCenter()
+
  });
  
  //margin left
@@ -240,12 +243,27 @@ function replaceOffset(image, left, top)
 	image.style.top = image.Top+"px";
 }
 
+function midCenter()
+{
+	var width = $( window ).width();
+	var height = $( window ).height();
+	var ratio = height/width
+	if(height > 800 && height > width)
+	{		if( ratio < 3 )
+				$(".container").css("margin-top", (height-800)/2)
+	}
+	else
+		$(".container").css("margin-top", "0px")
+}
+
 $( window ).resize(function() {
 	var left = $("#main_svg").offset().left-20;
 	var top = $("#main_svg").offset().top; // +30 ?
 	images.forEach(function(image) {
 		replaceOffset(image, left, top);
 	})
+
+	midCenter()
 });
 
 </script>
