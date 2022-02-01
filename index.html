@@ -81,11 +81,6 @@
 </body>
 <script defer="defer">
 
-$.ajaxSetup ({
-    // Disable caching of AJAX responses
-    //cache: false
-});
-
 anime({
 targets: '.grid-item',
 
@@ -100,6 +95,9 @@ loop: true
 });
 
 var overlay = null;
+var hasClicked = false;
+var animation = null;
+var images = []
 
 function setSvgViewbox(jsonObject) {
 	
@@ -122,9 +120,15 @@ function generateOverlayShape(jsonObject) {
 	});
 }
 
-// https://github.com/m-thalmann/overlayjs
 function doThing(g)
 {
+	hasClicked = true;
+	try{
+		setTimeout(animation.pauseOnLoopComplete, 100)
+	}
+	catch(e){
+		// I'm just lazy at this point
+	}
 	var existingOverlay = $('.overlay')
 	if(existingOverlay.length > 0) return;
 
@@ -161,7 +165,6 @@ function doHover(g, adder)
 	//image.css('top', parseInt(top) - adder +"px")
 }
 
-
 function polylinePaths(obj) {
     g=$(document.createElementNS('http://www.w3.org/2000/svg', 'g')).attr({id: obj.ImageId})
 		$(g).append(
@@ -174,7 +177,6 @@ function polylinePaths(obj) {
     return $(g)[0]
 }
 
-var images = []
 
 $.getJSON( "FinalData/artwork.json", function( json ) {
 
@@ -224,7 +226,37 @@ $.getJSON( "FinalData/artwork.json", function( json ) {
 
 	midCenter()
 
+	setTimeout(() => {
+		if(!hasClicked)
+		{
+			animation = pausableLoopAnime({
+				targets: '#img_6b01b9b9-d4b3-4518-bbcb-742697642c7d',
+
+				scale: [
+				{value: 1.1, easing: 'easeOutSine', duration: 500},
+				{value: 1, easing: 'easeInOutQuad', duration: 1000},
+				{value: 1, easing: 'easeInOutQuad', duration: 500}
+				]
+			});
+		}
+	}, 8000);
+
  });
+
+
+ function pausableLoopAnime({loopComplete, ...options}) {
+  const instance = anime({
+    ...options,
+    loop: true,
+    loopComplete: function(anim) {
+        if(instance.shouldPause) anim.pause();
+        if(typeof loopComplete === 'function') loopComplete(anim);
+    }
+  });
+  instance.pauseOnLoopComplete = () => instance.shouldPause = true;
+  return instance;
+}
+
  
  //margin left
 function loadAndPlaceImage(image, zIndex)
